@@ -198,21 +198,21 @@
 
 ### 第1周：概念打底与最小 Agent（D1-D7）
 
-- [ ] D1 总目标：让 AI 回复你的第一个问题
-- [ ] D1-速效（10min）：安装 Ollama，跑通第一次对话
+- [x] D1 总目标：让 AI 回复你的第一个问题
+- [x] D1-速效（10min）：安装 Ollama，跑通第一次对话
   ```bash
   brew install ollama && ollama run llama3.2
   # 在终端里直接提问："什么是 Agent？" → 看到 AI 回复
   ```
-- [ ] D1-学习：完成教程 [HF Unit0](https://huggingface.co/learn/agents-course/unit0/introduction) + [Happy-LLM Chapter1](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter1)（带着"刚才的对话和 Agent 有什么区别？"这个问题去看）
-- [ ] D1-实操：写一个 Python 脚本调用 Ollama，对比直接对话 vs 代码调用的差异
+- [x] D1-学习：完成教程 [HF Unit0](https://huggingface.co/learn/agents-course/unit0/introduction) + [Happy-LLM Chapter1](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter1)（带着"刚才的对话和 Agent 有什么区别？"这个问题去看）
+- [x] D1-实操：写一个 Python 脚本调用 Ollama，对比直接对话 vs 代码调用的差异
   ```python
   from langchain_ollama import ChatOllama
   llm = ChatOllama(model="llama3.2")
   print(llm.invoke("什么是 Agent？").content)
   ```
-- [ ] D1-产出：`lectures/lecture01/day01_first_chat.py` — 可运行，终端能看到 AI 回复
-- [ ] D1-验收：终端截图保存到 `screenshots/day01.png`
+- [x] D1-产出：`lectures/lecture01/day01_first_chat.py` — 可运行，终端能看到 AI 回复
+- [x] D1-验收：终端截图保存到 `screenshots/day01.png`
 - [ ] D2 总目标：看到 token 逐个生成的过程
 - [ ] D2-速效（10min）：给 D1 脚本加 streaming，看到文字一个一个出现
   ```python
