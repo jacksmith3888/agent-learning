@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ "$#" -ne 1 ]; then
+  echo "用法: ./run lecture01" >&2
+  exit 1
+fi
+
+lecture="$1"
+dir="lectures/$lecture"
+
+if [ ! -d "$dir" ]; then
+  echo "未找到目录: $dir" >&2
+  exit 1
+fi
+
+script="$dir/day01_first_chat.py"
+
+if [ ! -f "$script" ]; then
+  script="$(find "$dir" -maxdepth 1 -type f -name "*.py" | sort | head -n 1)"
+fi
+
+if [ -z "${script:-}" ] || [ ! -f "$script" ]; then
+  echo "未找到可运行脚本。请在 $dir 下创建 Python 文件。" >&2
+  exit 1
+fi
+
+exec uv run python "$script"

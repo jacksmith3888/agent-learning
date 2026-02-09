@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ "$#" -ne 1 ]; then
+  echo "用法: ./test lecture01" >&2
+  exit 1
+fi
+
+lecture="$1"
+dir="lectures/$lecture"
+
+if [ ! -d "$dir" ]; then
+  echo "未找到目录: $dir" >&2
+  exit 1
+fi
+
+target="$dir/test_cases.py"
+
+if [ ! -f "$target" ]; then
+  target="$(find "$dir" -maxdepth 1 -type f \( -name "test_*.py" -o -name "*_test.py" -o -name "*test*.py" \) | sort | head -n 1)"
+fi
+
+if [ -z "${target:-}" ] || [ ! -f "$target" ]; then
+  echo "未找到测试文件。请在 $dir 下创建 test_cases.py 或 test_*.py。" >&2
+  exit 1
+fi
+
+exec uv run pytest "$target"
