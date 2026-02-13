@@ -26,7 +26,7 @@
 - 结论：**部分覆盖（重排与引用评测需要补充）**
 - 在哪些教程：
   - [Happy-LLM Chapter8](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter8)
-  - [HF Agents Course Unit3](https://huggingface.co/learn/agents-course/unit3/introduction)
+  - [HF Agents Course Unit3 - Agentic RAG](https://huggingface.co/learn/agents-course/unit3/agentic-rag/introduction)
   - [LearnGraph 13.2 Intro of RAG](https://www.learngraph.online/LearnGraph%201.X/module-13-agentic-rag/13.2%20Intro%20of%20RAG.html)
 - 缺口补充：
   - [LangChain Retrieval](https://docs.langchain.com/oss/python/langchain/retrieval)
@@ -76,7 +76,7 @@
 - [Unit0](https://huggingface.co/learn/agents-course/unit0/introduction)
 - [Unit1](https://huggingface.co/learn/agents-course/unit1/introduction)
 - [Unit2](https://huggingface.co/learn/agents-course/unit2/introduction)
-- [Unit3](https://huggingface.co/learn/agents-course/unit3/introduction)
+- [Unit3 - Agentic RAG](https://huggingface.co/learn/agents-course/unit3/agentic-rag/introduction)
 - [Bonus Unit1](https://huggingface.co/learn/agents-course/bonus-unit1/introduction)
 - [Final Assignment](https://huggingface.co/learn/agents-course/final-assignment)
 
@@ -213,16 +213,16 @@
   ```
 - [x] D1-产出：`lectures/lecture01/day01_first_chat.py` — 可运行，终端能看到 AI 回复
 - [x] D1-验收：终端截图保存到 `screenshots/day01.png`
-- [ ] D2 总目标：看到 token 逐个生成的过程
-- [ ] D2-速效（10min）：给 D1 脚本加 streaming，看到文字一个一个出现
+- [x] D2 总目标：看到 token 逐个生成的过程
+- [x] D2-速效（10min）：给 D1 脚本加 streaming，看到文字一个一个出现
   ```python
   for chunk in llm.stream("解释一下 Transformer 架构"):
       print(chunk.content, end="", flush=True)
   ```
-- [ ] D2-学习：完成教程 [Happy-LLM Chapter3](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter3)（跳过数学公式，只看文字描述和图示）+ [HF Unit1](https://huggingface.co/learn/agents-course/unit1/introduction)
-- [ ] D2-实操：在脚本中加入 token 计数，打印"共生成 N 个 token，耗时 X 秒"
-- [ ] D2-产出：`lectures/lecture02/day02_streaming.py` — 可运行，能看到逐字输出 + token 统计
-- [ ] D2-验收：终端截图展示 streaming 效果
+- [x] D2-学习：完成教程 [Happy-LLM Chapter3](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter3)（跳过数学公式，只看文字描述和图示）+ HF Unit1 前5节：[Introduction](https://huggingface.co/learn/agents-course/unit1/introduction) → [What is an Agent?](https://huggingface.co/learn/agents-course/unit1/what-are-agents) → [Quiz1](https://huggingface.co/learn/agents-course/unit1/quiz1) → [What are LLMs?](https://huggingface.co/learn/agents-course/unit1/what-are-llms) → [Messages and Special Tokens](https://huggingface.co/learn/agents-course/unit1/messages-and-special-tokens)
+- [x] D2-实操：在脚本中加入 token 计数，打印"共生成 N 个 token，耗时 X 秒"
+- [x] D2-产出：`lectures/lecture02/day02_streaming.py` — 可运行，能看到逐字输出 + token 统计
+- [x] D2-验收：终端截图展示 streaming 效果
 - [ ] D3 总目标：让 AI 学会调用工具（计算器）
 - [ ] D3-速效（10min）：用 LangChain 给 AI 一个加法工具，让它算 123+456
   ```python
@@ -233,7 +233,7 @@
       return a + b
   # 绑定工具到 LLM，提问"123+456等于多少？"
   ```
-- [ ] D3-学习：[LearnGraph 1.4 LangGraph basics](https://www.learngraph.online/LearnGraph%201.X/module-1-langgraph-basics/1.4%20LangGraph%20basics.html) + [HF Unit1](https://huggingface.co/learn/agents-course/unit1/introduction)（关注 ReAct 循环：思考-行动-观察）
+- [ ] D3-学习：[LearnGraph 1.4 LangGraph basics](https://www.learngraph.online/LearnGraph%201.X/module-1-langgraph-basics/1.4%20LangGraph%20basics.html) + HF Unit1 第6-9节（工具+ReAct）：[What are Tools?](https://huggingface.co/learn/agents-course/unit1/tools) → [Quiz2](https://huggingface.co/learn/agents-course/unit1/quiz2) → [Agent Steps and Structure](https://huggingface.co/learn/agents-course/unit1/agent-steps-and-structure) → [Thoughts (ReAct)](https://huggingface.co/learn/agents-course/unit1/thoughts)
 - [ ] D3-实操：加第二个工具（乘法），让 AI 自主选择正确工具
 - [ ] D3-产出：`lectures/lecture03/day03_tool_agent.py` — AI 能自主选择加法或乘法工具
 - [ ] D3-验收：输入"3乘以4再加5" → AI 正确调用两个工具并返回 17
@@ -245,7 +245,7 @@
       """搜索专利数据库"""
       return f"找到3件关于'{keyword}'的专利：JP2024-001, JP2024-002, JP2024-003"
   ```
-- [ ] D4-学习：[LearnGraph 11.3 LangGraph MCP Integration](https://www.learngraph.online/LearnGraph%201.X/module-11-subgraph-mermaid-mcp-agent-node-tool/11.3%20LangGraph%20MCP%20Integration.html) + [HF Unit2](https://huggingface.co/learn/agents-course/unit2/introduction)
+- [ ] D4-学习：[LearnGraph 11.3 LangGraph MCP Integration](https://www.learngraph.online/LearnGraph%201.X/module-11-subgraph-mermaid-mcp-agent-node-tool/11.3%20LangGraph%20MCP%20Integration.html) + HF Unit1 第10-11节（Action/Observation）：[Actions](https://huggingface.co/learn/agents-course/unit1/actions) → [Observations](https://huggingface.co/learn/agents-course/unit1/observations) + [HF Unit2 Introduction](https://huggingface.co/learn/agents-course/unit2/introduction)（框架概览）
 - [ ] D4-实操：给工具加输入校验（keyword 不能为空、长度限制），设计 JSON Schema
 - [ ] D4-产出：`lectures/lecture04/day04_patent_tool.py` — "专利助手 v0.1"，能接收问题并返回模拟专利
 - [ ] D4-验收：输入"帮我搜索生物降解塑料的专利" → 返回模拟结果
@@ -257,7 +257,7 @@
 - [ ] D5-验收：故意输入 3 种错误场景，Agent 都能正常回复
 - [ ] D6 总目标：整合 D1-D5 为"专利助手 v0.2"可演示版（120min）
 - [ ] D6-速效（10min）：把 lecture03-lecture05 的代码合并为一个脚本，跑通完整对话
-- [ ] D6-学习：完成教程 [HF Unit2](https://huggingface.co/learn/agents-course/unit2/introduction) + [Happy-LLM Chapter7](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter7)
+- [ ] D6-学习：HF Unit1 第12-14节（实操收尾）：[Dummy Agent Library](https://huggingface.co/learn/agents-course/unit1/dummy-agent-library) → [Tutorial (smolagents)](https://huggingface.co/learn/agents-course/unit1/tutorial) → [Final Quiz](https://huggingface.co/learn/agents-course/unit1/final-quiz) + [Conclusion](https://huggingface.co/learn/agents-course/unit1/conclusion) + [Happy-LLM Chapter7](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter7)
 - [ ] D6-实操：加入对话循环（while True），让助手可以连续对话；加入 streaming 输出
 - [ ] D6-产出：`lectures/lecture06/patent_assistant_v0.2.py` — 完整的终端对话助手，支持专利搜索+计算+错误处理+streaming
 - [ ] D6-验收：录制一段 30 秒终端 demo（连续提问 3 个问题，展示工具调用和 streaming）
@@ -297,7 +297,7 @@
 - [ ] D12-产出：`lectures/lecture12/ab_compare.py`
 - [ ] D12-验收：给出结论和适用场景
 - [ ] D13 总目标：专利问题结构化
-- [ ] D13-学习：完成教程 [LangChain Essentials](https://academy.langchain.com/courses/langchain-essentials-python) + [HF Unit1](https://huggingface.co/learn/agents-course/unit1/introduction)
+- [ ] D13-学习：完成教程 [LangChain Essentials](https://academy.langchain.com/courses/langchain-essentials-python) + 回顾 [HF Unit1: What are Tools?](https://huggingface.co/learn/agents-course/unit1/tools)（复习工具定义与 JSON Schema）
 - [ ] D13-实操：实现"问题->JSON分析"CLI
 - [ ] D13-产出：`lectures/lecture13/cli_v1.py`
 - [ ] D13-验收：10条输入稳定输出
@@ -360,7 +360,7 @@
 - [ ] D23-产出：`lectures/lecture23/graph_v1.py`
 - [ ] D23-验收：执行路径正确
 - [ ] D24 总目标：ReAct in Graph
-- [LearnGraph 3.3 Multiple Schemas](https://www.learngraph.online/LearnGraph%201.X/module-3-state-reducer-memory/3.3%20Multiple%20Schemas.html) + [HF Unit1](https://huggingface.co/learn/agents-course/unit1/introduction)
+- [LearnGraph 3.3 Multiple Schemas](https://www.learngraph.online/LearnGraph%201.X/module-3-state-reducer-memory/3.3%20Multiple%20Schemas.html) + 回顾 [HF Unit1: Thoughts (ReAct)](https://huggingface.co/learn/agents-course/unit1/thoughts) + [Agent Steps and Structure](https://huggingface.co/learn/agents-course/unit1/agent-steps-and-structure)（ReAct 迁移到 Graph 前复习）
 - [ ] D24-实操：把ReAct迁移到图
 - [ ] D24-产出：`lectures/lecture24/react_graph.py`
 - [ ] D24-验收：工具调用稳定
@@ -438,7 +438,7 @@
 - [ ] D37-产出：`lectures/lecture37/rag_v1.py`
 - [ ] D37-验收：返回Top-k证据
 - [ ] D38 总目标：Agentic RAG
-- [LearnGraph 13.7 LangGraph Agentic RAG](https://www.learngraph.online/LearnGraph%201.X/module-13-agentic-rag/13.7%20LangGraph%20Agentic%20RAG.html) + [HF Unit3](https://huggingface.co/learn/agents-course/unit3/introduction)
+- [LearnGraph 13.7 LangGraph Agentic RAG](https://www.learngraph.online/LearnGraph%201.X/module-13-agentic-rag/13.7%20LangGraph%20Agentic%20RAG.html) + HF Unit3 前2节：[Introduction](https://huggingface.co/learn/agents-course/unit3/agentic-rag/introduction) → [Agentic RAG](https://huggingface.co/learn/agents-course/unit3/agentic-rag/agentic-rag)
 - [ ] D38-实操：引入"是否检索"决策
 - [ ] D38-产出：`lectures/lecture38/agentic_rag_v1.py`
 - [ ] D38-验收：可拒绝不必要检索
@@ -448,7 +448,7 @@
 - [ ] D39-产出：`lectures/lecture39/chunking_compare.py`
 - [ ] D39-验收：有召回差异数据
 - [ ] D40 总目标：查询改写
-- [ ] D40-学习：完成教程 [Deep Research](https://academy.langchain.com/courses/deep-research-with-langgraph) + [HF Unit3](https://huggingface.co/learn/agents-course/unit3/introduction)
+- [ ] D40-学习：完成教程 [Deep Research](https://academy.langchain.com/courses/deep-research-with-langgraph) + HF Unit3 第3节：[Creating a RAG Tool for Guest Stories](https://huggingface.co/learn/agents-course/unit3/agentic-rag/invitees)
 - [ ] D40-实操：实现query rewrite
 - [ ] D40-产出：`lectures/lecture40/rewrite_module.py`
 - [ ] D40-验收：长尾问题召回提升
@@ -458,7 +458,7 @@
 - [ ] D41-产出：`lectures/lecture41/citation_format.py`
 - [ ] D41-验收：每个结论可追溯
 - [ ] D42 总目标：周集成 / 缓冲日
-- [ ] D42-学习：完成教程 [HF Unit3](https://huggingface.co/learn/agents-course/unit3/introduction) + [LangChain Retrieval](https://docs.langchain.com/oss/python/langchain/retrieval)
+- [ ] D42-学习：HF Unit3 第4-6节（收尾）：[Building and Integrating Tools](https://huggingface.co/learn/agents-course/unit3/agentic-rag/tools) → [Creating Your Gala Agent](https://huggingface.co/learn/agents-course/unit3/agentic-rag/agent) → [Conclusion](https://huggingface.co/learn/agents-course/unit3/agentic-rag/conclusion) + [LangChain Retrieval](https://docs.langchain.com/oss/python/langchain/retrieval)
 - [ ] D42-实操：形成RAG v2
 - [ ] D42-产出：`lectures/lecture42/patent_rag_demo.py` + `docs/weekly/week06_summary.md`
 - [ ] D42-验收：20问人工评测完成
@@ -482,7 +482,7 @@
 - [ ] D45-产出：`lectures/lecture45/refusal_policy.py`
 - [ ] D45-验收：低证据回答显著下降
 - [ ] D46 总目标：多跳问题
-- [ ] D46-学习：完成教程 [Deep Research](https://academy.langchain.com/courses/deep-research-with-langgraph) + [HF Unit3](https://huggingface.co/learn/agents-course/unit3/introduction)
+- [ ] D46-学习：完成教程 [Deep Research](https://academy.langchain.com/courses/deep-research-with-langgraph) + 回顾 [HF Unit3: Agentic RAG](https://huggingface.co/learn/agents-course/unit3/agentic-rag/agentic-rag)（多跳场景复习）
 - [ ] D46-实操：多跳检索流程
 - [ ] D46-产出：`lectures/lecture46/multi_hop_rag.py`
 - [ ] D46-验收：复杂问题可分步求解
