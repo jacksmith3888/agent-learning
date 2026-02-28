@@ -223,8 +223,8 @@
 - [x] D2-实操：在脚本中加入 token 计数，打印"共生成 N 个 token，耗时 X 秒"
 - [x] D2-产出：`lectures/lecture02/day02_streaming.py` — 可运行，能看到逐字输出 + token 统计
 - [x] D2-验收：终端截图展示 streaming 效果
-- [ ] D3 总目标：让 AI 学会调用工具（计算器）
-- [ ] D3-速效（10min）：用 LangChain 给 AI 一个加法工具，让它算 123+456
+- [x] D3 总目标：让 AI 学会调用工具（计算器）
+- [x] D3-速效（10min）：用 LangChain 给 AI 一个加法工具，让它算 123+456
   ```python
   from langchain_core.tools import tool
   @tool
@@ -233,10 +233,10 @@
       return a + b
   # 绑定工具到 LLM，提问"123+456等于多少？"
   ```
-- [ ] D3-学习：[LearnGraph 1.4 LangGraph basics](https://www.learngraph.online/LearnGraph%201.X/module-1-langgraph-basics/1.4%20LangGraph%20basics.html) + HF Unit1 第6-9节（工具+ReAct）：[What are Tools?](https://huggingface.co/learn/agents-course/unit1/tools) → [Quiz2](https://huggingface.co/learn/agents-course/unit1/quiz2) → [Agent Steps and Structure](https://huggingface.co/learn/agents-course/unit1/agent-steps-and-structure) → [Thoughts (ReAct)](https://huggingface.co/learn/agents-course/unit1/thoughts)
-- [ ] D3-实操：加第二个工具（乘法），让 AI 自主选择正确工具
-- [ ] D3-产出：`lectures/lecture03/day03_tool_agent.py` — AI 能自主选择加法或乘法工具
-- [ ] D3-验收：输入"3乘以4再加5" → AI 正确调用两个工具并返回 17
+- [x] D3-学习：[LearnGraph 1.4 LangGraph basics](https://www.learngraph.online/LearnGraph%201.X/module-1-langgraph-basics/1.4%20LangGraph%20basics.html) + HF Unit1 第6-9节（工具+ReAct）：[What are Tools?](https://huggingface.co/learn/agents-course/unit1/tools) → [Quiz2](https://huggingface.co/learn/agents-course/unit1/quiz2) → [Agent Steps and Structure](https://huggingface.co/learn/agents-course/unit1/agent-steps-and-structure) → [Thoughts (ReAct)](https://huggingface.co/learn/agents-course/unit1/thoughts)
+- [x] D3-实操：加第二个工具（乘法），让 AI 自主选择正确工具
+- [x] D3-产出：`lectures/lecture03/day03_tool_agent.py` — AI 能自主选择加法或乘法工具
+- [x] D3-验收：输入"3乘以4再加5" → AI 正确调用两个工具并返回 17
 - [ ] D4 总目标：让 AI 调用你设计的"专利搜索"工具
 - [ ] D4-速效（10min）：写一个假的专利搜索工具（返回模拟数据），接入 `lectures/lecture03/` 的 Agent
   ```python
