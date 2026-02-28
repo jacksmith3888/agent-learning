@@ -249,12 +249,12 @@
 - [x] D4-实操：给工具加输入校验（keyword 不能为空、长度限制），设计 JSON Schema
 - [x] D4-产出：`lectures/lecture04/day04_patent_tool.py` — "专利助手 v0.1"，能接收问题并返回模拟专利
 - [x] D4-验收：输入"帮我搜索生物降解塑料的专利" → 返回模拟结果
-- [ ] D5 总目标：让 Agent 优雅地处理错误
-- [ ] D5-速效（10min）：故意让工具报错（传入 None），观察 Agent 崩溃
-- [ ] D5-学习：完成教程 [Happy-LLM Chapter5](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter5) + [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview)
-- [ ] D5-实操：给 `lectures/lecture04/` 的 Agent 加错误处理 — 工具超时/解析失败/空结果都有兜底
-- [ ] D5-产出：`lectures/lecture05/day05_error_handling.py` — Agent 遇到错误不崩溃，给出友好提示
-- [ ] D5-验收：故意输入 3 种错误场景，Agent 都能正常回复
+- [x] D5 总目标：让 Agent 优雅地处理错误
+- [x] D5-速效（10min）：故意让工具报错（传入 None），观察 Agent 崩溃
+- [x] D5-学习：完成教程 [Happy-LLM Chapter5](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter5) + [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview)
+- [x] D5-实操：给 `lectures/lecture04/` 的 Agent 加错误处理 — 工具超时/解析失败/空结果都有兜底
+- [x] D5-产出：`lectures/lecture05/day05_error_handling.py` — Agent 遇到错误不崩溃，给出友好提示
+- [x] D5-验收：故意输入 3 种错误场景，Agent 都能正常回复
 - [ ] D6 总目标：整合 D1-D5 为"专利助手 v0.2"可演示版（120min）
 - [ ] D6-速效（10min）：把 lecture03-lecture05 的代码合并为一个脚本，跑通完整对话
 - [ ] D6-学习：HF Unit1 第12-14节（实操收尾）：[Dummy Agent Library](https://huggingface.co/learn/agents-course/unit1/dummy-agent-library) → [Tutorial (smolagents)](https://huggingface.co/learn/agents-course/unit1/tutorial) → [Final Quiz](https://huggingface.co/learn/agents-course/unit1/final-quiz) + [Conclusion](https://huggingface.co/learn/agents-course/unit1/conclusion) + [Happy-LLM Chapter7](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter7)
