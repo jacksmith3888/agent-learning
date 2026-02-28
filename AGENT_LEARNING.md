@@ -237,18 +237,18 @@
 - [x] D3-实操：加第二个工具（乘法），让 AI 自主选择正确工具
 - [x] D3-产出：`lectures/lecture03/day03_tool_agent.py` — AI 能自主选择加法或乘法工具
 - [x] D3-验收：输入"3乘以4再加5" → AI 正确调用两个工具并返回 17
-- [ ] D4 总目标：让 AI 调用你设计的"专利搜索"工具
-- [ ] D4-速效（10min）：写一个假的专利搜索工具（返回模拟数据），接入 `lectures/lecture03/` 的 Agent
+- [x] D4 总目标：让 AI 调用你设计的"专利搜索"工具
+- [x] D4-速效（10min）：写一个假的专利搜索工具（返回模拟数据），接入 `lectures/lecture03/` 的 Agent
   ```python
   @tool
   def search_patent(keyword: str) -> str:
       """搜索专利数据库"""
       return f"找到3件关于'{keyword}'的专利：JP2024-001, JP2024-002, JP2024-003"
   ```
-- [ ] D4-学习：[LearnGraph 11.3 LangGraph MCP Integration](https://www.learngraph.online/LearnGraph%201.X/module-11-subgraph-mermaid-mcp-agent-node-tool/11.3%20LangGraph%20MCP%20Integration.html) + HF Unit1 第10-11节（Action/Observation）：[Actions](https://huggingface.co/learn/agents-course/unit1/actions) → [Observations](https://huggingface.co/learn/agents-course/unit1/observations) + [HF Unit2 Introduction](https://huggingface.co/learn/agents-course/unit2/introduction)（框架概览）
-- [ ] D4-实操：给工具加输入校验（keyword 不能为空、长度限制），设计 JSON Schema
-- [ ] D4-产出：`lectures/lecture04/day04_patent_tool.py` — "专利助手 v0.1"，能接收问题并返回模拟专利
-- [ ] D4-验收：输入"帮我搜索生物降解塑料的专利" → 返回模拟结果
+- [x] D4-学习：[LearnGraph 11.3 LangGraph MCP Integration](https://www.learngraph.online/LearnGraph%201.X/module-11-subgraph-mermaid-mcp-agent-node-tool/11.3%20LangGraph%20MCP%20Integration.html) + HF Unit1 第10-11节（Action/Observation）：[Actions](https://huggingface.co/learn/agents-course/unit1/actions) → [Observations](https://huggingface.co/learn/agents-course/unit1/observations) + [HF Unit2 Introduction](https://huggingface.co/learn/agents-course/unit2/introduction)（框架概览）
+- [x] D4-实操：给工具加输入校验（keyword 不能为空、长度限制），设计 JSON Schema
+- [x] D4-产出：`lectures/lecture04/day04_patent_tool.py` — "专利助手 v0.1"，能接收问题并返回模拟专利
+- [x] D4-验收：输入"帮我搜索生物降解塑料的专利" → 返回模拟结果
 - [ ] D5 总目标：让 Agent 优雅地处理错误
 - [ ] D5-速效（10min）：故意让工具报错（传入 None），观察 Agent 崩溃
 - [ ] D5-学习：完成教程 [Happy-LLM Chapter5](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter5) + [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview)
