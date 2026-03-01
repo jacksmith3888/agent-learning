@@ -255,19 +255,19 @@
 - [x] D5-实操：给 `lectures/lecture04/` 的 Agent 加错误处理 — 工具超时/解析失败/空结果都有兜底
 - [x] D5-产出：`lectures/lecture05/day05_error_handling.py` — Agent 遇到错误不崩溃，给出友好提示
 - [x] D5-验收：故意输入 3 种错误场景，Agent 都能正常回复
-- [ ] D6 总目标：整合 D1-D5 为"专利助手 v0.2"可演示版（120min）
-- [ ] D6-速效（10min）：把 lecture03-lecture05 的代码合并为一个脚本，跑通完整对话
-- [ ] D6-学习：HF Unit1 第12-14节（实操收尾）：[Dummy Agent Library](https://huggingface.co/learn/agents-course/unit1/dummy-agent-library) → [Tutorial (smolagents)](https://huggingface.co/learn/agents-course/unit1/tutorial) → [Final Quiz](https://huggingface.co/learn/agents-course/unit1/final-quiz) + [Conclusion](https://huggingface.co/learn/agents-course/unit1/conclusion) + [Happy-LLM Chapter7](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter7)
-- [ ] D6-实操：加入对话循环（while True），让助手可以连续对话；加入 streaming 输出
-- [ ] D6-产出：`lectures/lecture06/patent_assistant_v0.2.py` — 完整的终端对话助手，支持专利搜索+计算+错误处理+streaming
-- [ ] D6-验收：录制一段 30 秒终端 demo（连续提问 3 个问题，展示工具调用和 streaming）
-- [ ] D7 总目标：周展示 + 复盘（120min）
-- [ ] D7-速效（10min）：给 patent_assistant_v0.2.py 加一个 `--version` 参数，打印已有功能列表
-- [ ] D7-学习：[LearnGraph 9.1 Scoping](https://www.learngraph.online/LearnGraph%201.X/module-9-deep-research/9.1%20Scoping.html)
-- [ ] D7-实操：整理本周学习笔记到 `lectures/lecture07/README.md` 和 `docs/weekly/week01_summary.md`，回顾 lecture01-lecture06 的代码
-- [ ] D7-产出：`lectures/lecture07/README.md` + `docs/weekly/week01_summary.md`
-- [ ] D7-验收：能向别人（或自己）演示"我这周做了一个能对话、能搜专利、能处理错误的 AI 助手"
-- [ ] D7-里程碑：我的 AI 助手能对话了！
+- [x] D6 总目标：整合 D1-D5 为"专利助手 v0.2"可演示版（120min）
+- [x] D6-速效（10min）：把 lecture03-lecture05 的代码合并为一个脚本，跑通完整对话
+- [x] D6-学习：HF Unit1 第12-14节（实操收尾）：[Dummy Agent Library](https://huggingface.co/learn/agents-course/unit1/dummy-agent-library) → [Tutorial (smolagents)](https://huggingface.co/learn/agents-course/unit1/tutorial) → [Final Quiz](https://huggingface.co/learn/agents-course/unit1/final-quiz) + [Conclusion](https://huggingface.co/learn/agents-course/unit1/conclusion) + [Happy-LLM Chapter7](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter7)
+- [x] D6-实操：加入对话循环（while True），让助手可以连续对话；加入 streaming 输出
+- [x] D6-产出：`lectures/lecture06/patent_assistant_v0.2.py` — 完整的终端对话助手，支持专利搜索+计算+错误处理+streaming
+- [x] D6-验收：录制一段 30 秒终端 demo（连续提问 3 个问题，展示工具调用和 streaming）
+- [x] D7 总目标：周展示 + 复盘（120min）
+- [x] D7-速效（10min）：给 patent_assistant_v0.2.py 加一个 `--version` 参数，打印已有功能列表
+- [x] D7-学习：[LearnGraph 9.1 Scoping](https://www.learngraph.online/LearnGraph%201.X/module-9-deep-research/9.1%20Scoping.html)
+- [x] D7-实操：整理本周学习笔记到 `lectures/lecture07/README.md` 和 `docs/weekly/week01_summary.md`，回顾 lecture01-lecture06 的代码
+- [x] D7-产出：`lectures/lecture07/README.md` + `docs/weekly/week01_summary.md`
+- [x] D7-验收：能向别人（或自己）演示"我这周做了一个能对话、能搜专利、能处理错误的 AI 助手"
+- [x] D7-里程碑：我的 AI 助手能对话了！
 
 ### 第2周：Prompt 与结构化输出（D8-D14）
 
