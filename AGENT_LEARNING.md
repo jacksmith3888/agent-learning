@@ -396,11 +396,11 @@
 
 ### 第2周：Prompt 与结构化输出（D8-D14）
 
-- [ ] D8 总目标：Prompt 基础
-- [ ] D8-学习：先跑本地官方 notebook `langchain/L7_structuredOutput.ipynb`，再看 [LangChain Essentials Lesson 7: Structured Output](https://academy.langchain.com/courses/langchain-essentials-python)（重点：`with_structured_output` 用法与 JSON Schema）+ [Happy-LLM Chapter2](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter2)（Prompt 设计原则）
-- [ ] D8-实操：写3个模板（问答/抽取/改写）
-- [ ] D8-产出：`lectures/lecture08/prompt_templates.py`
-- [ ] D8-验收：每个模板都有变量定义
+- [x] D8 总目标：Prompt 基础
+- [x] D8-学习：先跑本地官方 notebook `langchain/L7_structuredOutput.ipynb`，再看 [LangChain Essentials Lesson 7: Structured Output](https://academy.langchain.com/courses/langchain-essentials-python)（重点：`with_structured_output` 用法与 JSON Schema）+ [Happy-LLM Chapter2](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter2)（Prompt 设计原则）
+- [x] D8-实操：写3个模板（问答/抽取/改写）
+- [x] D8-产出：`lectures/lecture08/prompt_templates.py`
+- [x] D8-验收：每个模板都有变量定义
 - [ ] D9 总目标：约束输出
 - [ ] D9-学习：先跑本地官方 notebook `langchain/L8_dynamic.ipynb`，再看 [LangChain Essentials Lesson 8: Dynamic Prompt](https://academy.langchain.com/courses/langchain-essentials-python)（动态 Prompt 模板与变量注入）+ [Pydantic 官方文档 - Models](https://docs.pydantic.dev/latest/concepts/models/)（Schema 定义基础）
 - [ ] D9-实操：定义结构化输出模型
