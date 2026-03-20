@@ -1,6 +1,6 @@
 # Agent 学习计划（12周 / D1-D84 / 官方资料优先版）
 
-更新时间：2026-03-07
+更新时间：2026-03-20
 
 适用背景：化学专利分析 Agent 项目
 
@@ -406,21 +406,21 @@
 - [x] D9-实操：定义结构化输出模型
 - [x] D9-产出：`lectures/lecture09/schema_v1.py`
 - [x] D9-验收：可自动验证通过
-- [ ] D10 总目标：失败样本构建
-- [ ] D10-学习：[LangChain Structured Output](https://docs.langchain.com/oss/python/langchain/structured-output)（信息抽取、Schema 约束、失败重试）+ 回放 `langchain/L7_structuredOutput.ipynb` 里的成功/失败样例
-- [ ] D10-实操：构造5条输出失败样本
-- [ ] D10-产出：`lectures/lecture10/failure_samples.json`
-- [ ] D10-验收：覆盖缺字段/类型错/多余字段
-- [ ] D11 总目标：重试策略
-- [ ] D11-学习：[LangChain Structured Output](https://docs.langchain.com/oss/python/langchain/structured-output)（结构化输出校验与错误处理）+ 回顾 D10 失败样本 + 对照 `langchain/L7_structuredOutput.ipynb` 的输出约束方式
-- [ ] D11-实操：设计修复提示+二次解析
-- [ ] D11-产出：`lectures/lecture11/retry_flow.mmd`
-- [ ] D11-验收：两轮内成功率提升可观测
-- [ ] D12 总目标：Prompt A/B
-- [ ] D12-学习：回顾 [Happy-LLM Chapter2](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter2)（重点：Few-shot / Chain-of-Thought 技巧）+ 回顾 `langchain/L7_structuredOutput.ipynb` / `langchain/L8_dynamic.ipynb` 笔记
-- [ ] D12-实操：比较短提示与强约束提示
-- [ ] D12-产出：`lectures/lecture12/ab_compare.py`
-- [ ] D12-验收：给出结论和适用场景
+- [x] D10 总目标：失败样本构建
+- [x] D10-学习：[LangChain Structured Output](https://docs.langchain.com/oss/python/langchain/structured-output)（信息抽取、Schema 约束、失败重试）+ 回放 `langchain/L7_structuredOutput.ipynb` 里的成功/失败样例
+- [x] D10-实操：构造5条输出失败样本
+- [x] D10-产出：`lectures/lecture10/failure_samples.json`
+- [x] D10-验收：覆盖缺字段/类型错/多余字段
+- [x] D11 总目标：重试策略
+- [x] D11-学习：[LangChain Structured Output](https://docs.langchain.com/oss/python/langchain/structured-output)（结构化输出校验与错误处理）+ 回顾 D10 失败样本 + 对照 `langchain/L7_structuredOutput.ipynb` 的输出约束方式
+- [x] D11-实操：设计修复提示+二次解析
+- [x] D11-产出：`lectures/lecture11/retry_flow.mmd` + `lectures/lecture11/retry_parser.py`
+- [x] D11-验收：两轮内成功率提升可观测
+- [x] D12 总目标：Prompt A/B
+- [x] D12-学习：回顾 [Prompt Engineering Guide - Few-shot](https://www.promptingguide.ai/techniques/fewshot) + [Prompt Engineering Guide - Chain-of-Thought](https://www.promptingguide.ai/techniques/cot)（重点：Few-shot / Chain-of-Thought 技巧）+ 回顾 `langchain/L7_structuredOutput.ipynb` / `langchain/L8_dynamic.ipynb` 笔记
+- [x] D12-实操：比较短提示与强约束提示
+- [x] D12-产出：`lectures/lecture12/ab_compare.py`
+- [x] D12-验收：短提示更适合低风险开放生成；强约束提示在结构化输出和自动校验场景更稳定
 - [ ] D13 总目标：专利问题结构化
 - [ ] D13-学习：综合运用 `langchain/L7_structuredOutput.ipynb` + `langchain/L8_dynamic.ipynb` + D10-D12 的经验，回顾 [HF Unit1: What are Tools?](https://huggingface.co/learn/agents-course/en/unit1/tools)（复习工具定义与 JSON Schema）
 - [ ] D13-实操：实现"问题->JSON分析"CLI

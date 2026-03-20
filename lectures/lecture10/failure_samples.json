@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "description": "D10 — 结构化输出失败样本集",
+    "schema_source": "lectures/lecture09/schema_v1.py",
+    "failure_categories": [
+      "missing_field（缺字段）",
+      "type_error（类型错）",
+      "extra_field（多余字段）",
+      "empty_value（空值 / 空列表）",
+      "format_error（格式不符合约束）"
+    ],
+    "total_samples": 5
+  },
+  "samples": [
+    {
+      "id": "fail_01",
+      "schema": "PatentInfo",
+      "category": "missing_field",
+      "description": "缺少必填字段 patent_id 和 core_invention，模拟 LLM 只返回部分字段",
+      "llm_output": {
+        "applicant": "Toyota Motor Corporation",
+        "filing_date": "2024-03-15",
+        "ipc_codes": ["H01M 10/0562"],
+        "tech_domain": "固态电池电解质材料"
+      },
+      "expected_error": "ValidationError: patent_id, core_invention — Field required",
+      "fix_strategy": "在 System Prompt 中明确列出所有必填字段名并标注 [必填]，或使用 retry prompt 提示 LLM 补全缺失字段"
+    },
+    {
+      "id": "fail_02",
+      "schema": "PatentInfo",
+      "category": "type_error",
+      "description": "ipc_codes 应为 list[str]，但 LLM 返回了单个字符串；filing_date 应为 YYYY-MM-DD 格式，但返回了自然语言日期",
+      "llm_output": {
+        "patent_id": "JP2024-12345",
+        "applicant": "Mitsubishi Chemical",
+        "filing_date": "2024年3月15日",
+        "ipc_codes": "C08L 67/04",
+        "tech_domain": "生物降解塑料",
+        "core_invention": "PLA/PBAT 复合材料配方"
+      },
+      "expected_error": "ValidationError: ipc_codes — Input should be a valid list (str given)",
+      "fix_strategy": "1) 在 Schema 的 Field description 中注明 '必须返回JSON数组格式 [\"...\", \"...\"]'；2) 对 filing_date 添加 @field_validator 强制校验 YYYY-MM-DD 格式；3) 可在 retry prompt 中附带正确格式示例"
+    },
+    {
+      "id": "fail_03",
+      "schema": "PatentComparison",
+      "category": "extra_field",
+      "description": "LLM 返回了 Schema 中未定义的额外字段 recommendation 和 risk_level，模拟模型'过度发挥'",
+      "llm_output": {
+        "patent_a_id": "JP2024-001",
+        "patent_b_id": "JP2024-002",
+        "common_domain": "生物降解塑料",
+        "key_differences": [
+          "基材不同：PLA+PBAT vs PLA+PBS",
+          "应用领域不同：包装 vs 农业"
+        ],
+        "similarity": "中",
+        "conclusion": "两件专利虽然都涉及生物降解塑料，但基材配方和目标应用场景存在明显差异。",
+        "recommendation": "建议进一步分析两者的力学性能差异",
+        "risk_level": "中等"
+      },
+      "expected_error": "Pydantic 默认配置下 extra fields 会被静默忽略（不报错），但如果 model_config 设置 extra='forbid' 则报 ValidationError: recommendation, risk_level — Extra inputs are not permitted",
+      "fix_strategy": "1) 在 BaseModel 中设置 model_config = ConfigDict(extra='forbid') 严格禁止多余字段；2) 或接受多余字段但在后处理中过滤，取决于业务场景"
+    },
+    {
+      "id": "fail_04",
+      "schema": "QueryRewrite",
+      "category": "empty_value",
+      "description": "expanded_keywords 返回空列表，formal_query 为空字符串，模拟 LLM 对简短输入无法有效改写",
+      "llm_output": {
+        "original_query": "塑料",
+        "formal_query": "",
+        "expanded_keywords": [],
+        "suggested_ipc": []
+      },
+      "expected_error": "Pydantic 验证通过（技术上合法），但业务上不可接受 — formal_query 为空意味着检索无法执行",
+      "fix_strategy": "1) 添加 @field_validator 校验 formal_query 不为空字符串（min_length=1）；2) 添加 @field_validator 校验 expanded_keywords 至少包含 1 个元素；3) 在 System Prompt 中明确 '如果无法改写，请保持原始查询作为 formal_query'"
+    },
+    {
+      "id": "fail_05",
+      "schema": "PatentComparison",
+      "category": "format_error",
+      "description": "similarity 字段应为枚举值 '高/中/低'，但 LLM 返回了英文 'Medium'；key_differences 应为列表但返回了单个长字符串",
+      "llm_output": {
+        "patent_a_id": "JP2024-003",
+        "patent_b_id": "JP2024-004",
+        "common_domain": "锂离子电池正极材料",
+        "key_differences": "专利A使用镍钴锰三元材料，专利B使用磷酸铁锂材料，两者在能量密度、安全性和成本方面存在显著差异",
+        "similarity": "Medium",
+        "conclusion": "两件专利针对不同的正极材料技术路线。"
+      },
+      "expected_error": "ValidationError: similarity — Input should be '高', '中' or '低' (got 'Medium'); key_differences — Input should be a valid list (str given)",
+      "fix_strategy": "1) 在 System Prompt 中用中文明确枚举值 '只能选择：高、中、低'；2) 添加 @field_validator 对 similarity 做映射（High→高, Medium→中, Low→低）实现兼容；3) 对 key_differences 添加预处理，将单字符串按句号/分号切分为列表"
+    }
+  ]
+}
