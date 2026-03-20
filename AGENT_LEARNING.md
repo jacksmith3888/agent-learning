@@ -401,11 +401,11 @@
 - [x] D8-实操：写3个模板（问答/抽取/改写）
 - [x] D8-产出：`lectures/lecture08/prompt_templates.py`
 - [x] D8-验收：每个模板都有变量定义
-- [ ] D9 总目标：约束输出
-- [ ] D9-学习：先跑本地官方 notebook `langchain/L8_dynamic.ipynb`，再看 [LangChain Essentials Lesson 8: Dynamic Prompt](https://academy.langchain.com/courses/langchain-essentials-python)（动态 Prompt 模板与变量注入）+ [Pydantic 官方文档 - Models](https://docs.pydantic.dev/latest/concepts/models/)（Schema 定义基础）
-- [ ] D9-实操：定义结构化输出模型
-- [ ] D9-产出：`lectures/lecture09/schema_v1.py`
-- [ ] D9-验收：可自动验证通过
+- [x] D9 总目标：约束输出
+- [x] D9-学习：先跑本地官方 notebook `langchain/L8_dynamic.ipynb`，再看 [LangChain Essentials Lesson 8: Dynamic Prompt](https://academy.langchain.com/courses/langchain-essentials-python)（动态 Prompt 模板与变量注入）+ [Pydantic 官方文档 - Models](https://docs.pydantic.dev/latest/concepts/models/)（Schema 定义基础）
+- [x] D9-实操：定义结构化输出模型
+- [x] D9-产出：`lectures/lecture09/schema_v1.py`
+- [x] D9-验收：可自动验证通过
 - [ ] D10 总目标：失败样本构建
 - [ ] D10-学习：[LangChain Structured Output](https://docs.langchain.com/oss/python/langchain/structured-output)（信息抽取、Schema 约束、失败重试）+ 回放 `langchain/L7_structuredOutput.ipynb` 里的成功/失败样例
 - [ ] D10-实操：构造5条输出失败样本
