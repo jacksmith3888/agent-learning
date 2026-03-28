@@ -1,0 +1,35 @@
+# Retry Flow 流程图
+
+```mermaid
+flowchart TD
+    A["开始：接收用户输入与目标 Schema"] --> B["第一次调用模型<br/>生成 candidate_json"]
+    B --> C["严格校验<br/>Pydantic + extra='forbid'"]
+    C -->|通过| D["直接返回结构化结果"]
+    C -->|失败| E["提取 validation errors<br/>保留原始 JSON"]
+
+    E --> F{"错误类型"}
+    F -->|缺字段| G["提示补全必填字段<br/>逐项点名缺失键"]
+    F -->|类型错| H["提示修正字段类型<br/>附正确 JSON 片段示例"]
+    F -->|多余字段| I["提示删除未定义字段<br/>只保留 Schema 白名单"]
+    F -->|空值| J["提示不可返回空字符串/空数组<br/>无法改写时回填原始值"]
+    F -->|格式错| K["提示修正枚举/日期/列表格式<br/>列出允许值"]
+
+    G --> L["生成 retry prompt"]
+    H --> L
+    I --> L
+    J --> L
+    K --> L
+
+    L["生成 retry prompt<br/>包含 Schema / 原始输出 / 错误清单 / 修复规则"] --> M["第二次调用模型<br/>生成 repaired_json"]
+    M --> N["再次严格校验"]
+    N -->|通过| O["返回修复后的结构化结果"]
+    N -->|失败| P["进入 fallback<br/>记录失败样本并人工复核"]
+
+    D --> Q["记录指标<br/>first_pass_success += 1"]
+    O --> R["记录指标<br/>retry_success += 1"]
+    P --> S["记录指标<br/>retry_failed += 1"]
+
+    Q --> T["输出日报或周报中的 D11 观测结果"]
+    R --> T
+    S --> T
+```

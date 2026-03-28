@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "version": "v1.0",
+    "created": "2026-03-28",
+    "description": "D14 — Prompt 设计与结构化输出最佳实践（基于 D8-D13 实战提炼）",
+    "source_lectures": ["lecture08", "lecture09", "lecture10", "lecture11", "lecture12", "lecture13"],
+    "source_notebooks": ["langchain/L7_structuredOutput.ipynb", "langchain/L8_dynamic.ipynb"]
+  },
+  "strategies": [
+    {
+      "id": "S01",
+      "name": "角色设定 + 边界约束优先",
+      "category": "prompt_design",
+      "description": "在 system prompt 开头用一句话设定角色身份，紧接着列出明确的行为边界（允许做什么、禁止做什么）。角色越聚焦，输出越稳定。",
+      "applicable_scenarios": ["信息抽取", "问答", "工具路由"],
+      "best_practice": "system prompt 第一句声明角色，第二段用「你应该/你不应该」列出关键约束。",
+      "anti_pattern": "不设角色或角色定义过宽（如「你是万能助手」），导致模型自由发挥、格式不稳定。",
+      "counter_example": {
+        "bad_prompt": "帮我分析一下这个专利。",
+        "problem": "无角色设定、无格式要求，模型可能输出散文、列表、表格等任意格式。",
+        "good_prompt": "你是一位专业的化学专利分析师。请根据以下专利文档内容回答用户的问题。如果文档中没有足够信息，请明确说明「无法从所提供的文档中得出结论」，不要编造任何不在文档中的内容。"
+      },
+      "evidence": "D8 qa_prompt 设定了「专利分析师」角色 + 明确的「不编造」禁令，输出一致性显著优于无角色版本。"
+    },
+    {
+      "id": "S02",
+      "name": "用 Pydantic Schema 约束输出结构",
+      "category": "structured_output",
+      "description": "用 Pydantic BaseModel 定义输出 Schema，通过 create_agent + response_format 让 LLM 直接生成结构化对象，比纯文本解析更稳定。",
+      "applicable_scenarios": ["信息抽取", "路由分析", "对比报表"],
+      "best_practice": "定义 BaseModel 时用 Field(description=...) 给每个字段加说明；配合 extra='forbid' 拒绝多余字段。",
+      "anti_pattern": "要求 LLM 输出 JSON 但不提供 Schema，全靠正则/字符串解析提取字段。",
+      "counter_example": {
+        "bad_prompt": "请用 JSON 格式输出结果。",
+        "problem": "模型可能遗漏字段、添加多余字段、类型不匹配、嵌套结构不一致。",
+        "good_prompt": "使用 create_agent(model=..., response_format=PatentInfo) 直接约束输出为 PatentInfo Schema。"
+      },
+      "evidence": "D9 schema_v1.py 的 3 个 Schema 通过 response_format 直接绑定模型，D10 failure_samples 验证了 extra='forbid' 能拦截所有多余字段。"
+    },
+    {
+      "id": "S03",
+      "name": "枚举约束替代自由文本",
+      "category": "structured_output",
+      "description": "对取值范围有限的字段（如状态、等级、意图类型），用 Enum 或 Literal 约束而非让模型自由填写字符串。",
+      "applicable_scenarios": ["置信度标注", "意图分类", "相似度评级"],
+      "best_practice": "定义 StrEnum 枚举类，配合 @field_validator(mode='before') 做别名映射（如 High→高）。",
+      "anti_pattern": "用 str 类型接收分类字段，导致模型输出 'high' / 'High' / '高' / '高的' 等变体。",
+      "counter_example": {
+        "bad_prompt": "similarity 字段请填写相似度。",
+        "problem": "模型可能输出 'High'、'非常高'、'高度相似' 等无法枚举匹配的值。",
+        "good_prompt": "similarity 只能填写 高 / 中 / 低 三个值之一。配合 SimilarityLevel(StrEnum) 和 @field_validator 的 mapping。"
+      },
+      "evidence": "D10 failure_samples 中 sample F003 的 similarity='High' 被 D11 的 mapping {'High':'高'} 自动修复。D13 cli_v1.py 的 Confidence 枚举同样采用了此模式。"
+    },
+    {
+      "id": "S04",
+      "name": "二次解析 + 修复提示（Retry with Error Feedback）",
+      "category": "error_recovery",
+      "description": "首轮输出未通过校验时，不直接丢弃，而是把校验错误信息注入修复提示中二次调用模型。两轮内成功率可达 90%+。",
+      "applicable_scenarios": ["结构化输出校验失败", "字段缺失/类型错误"],
+      "best_practice": "修复提示应包含：(1) 原始输出 (2) 逐条错误描述 (3) 目标 Schema (4) 修复规则。超过 2 轮仍失败则 fallback 到规则引擎。",
+      "anti_pattern": "校验失败后直接报错退出，不做任何修复尝试。",
+      "counter_example": {
+        "bad_approach": "if not valid: raise ValueError('输出格式错误')",
+        "problem": "用户体验差，模型只差一两个字段就能通过，白白浪费了一次推理。",
+        "good_approach": "构建 retry_prompt 包含原始输出 + 错误清单 + 修复规则，再次调用模型；仍失败则用 repair_output() 规则修复。"
+      },
+      "evidence": "D11 retry_parser.py 演示了首轮 0% → 两轮内 100% 的修复效果。D13 cli_v1.py 的 analyze_with_llm() 也内置了一轮重试。"
+    },
+    {
+      "id": "S05",
+      "name": "轻量 Schema + 后处理补全",
+      "category": "prompt_design",
+      "description": "LLM 只填写核心字段（扁平结构），复杂嵌套字段由后处理规则补全。减少生成量 → 降低出错概率 → 加速响应。",
+      "applicable_scenarios": ["嵌套 Schema", "字段数 > 10 的复杂输出"],
+      "best_practice": "把完整 Schema 拆分为 LLMSchema（≤7 字段）+ 后处理 enrich() 函数。LLM 专注于需要语义理解的字段。",
+      "anti_pattern": "让 LLM 一次性生成所有 23 个字段的深层嵌套 JSON，生成慢且出错率高。",
+      "counter_example": {
+        "bad_approach": "response_format=PatentQuestionAnalysis（23 字段 4 层嵌套）",
+        "problem": "7B 本地模型生成 23 字段深层嵌套耗时长，且 tool_arguments / response_plan 等子对象容易出错。",
+        "good_approach": "response_format=LLMAnalysis（7 个扁平字段），用 enrich_to_full() 补全 tool_arguments / response_plan / extracted_entities。"
+      },
+      "evidence": "D13 cli_v1.py 从直接用 PatentQuestionAnalysis 作 response_format 改为 LLMAnalysis + enrich_to_full()，成功率从不稳定提升到 10/10 稳定通过。"
+    },
+    {
+      "id": "S06",
+      "name": "强约束提示用于结构化场景，短提示用于开放生成",
+      "category": "prompt_design",
+      "description": "Prompt A/B 对比结论：当下游需要消费 JSON 时，强约束提示（带逐条规则+自检指令）的通过率显著高于短提示；但开放式问答/头脑风暴场景短提示更灵活。",
+      "applicable_scenarios": ["所有需要输出 JSON 的场景"],
+      "best_practice": "强约束提示模板：角色 → 任务 → 逐条字段规则 → 自检指令 → 输出格式约束。",
+      "anti_pattern": "对所有场景统一使用同一种提示风格。",
+      "counter_example": {
+        "bad_prompt": "请分析这个专利问题并输出 JSON。（用于需要严格字段校验的场景）",
+        "problem": "短提示在结构化场景下缺字段/类型错的概率高达 60%+。",
+        "good_prompt": "角色设定 + 任务描述 + 8 条逐条约束（如「只输出 JSON」「所有必填字段必须完整」「日期 YYYY-MM-DD」「similarity 只填 高/中/低」等）+ 「输出前先自检字段完整性与类型」。"
+      },
+      "evidence": "D12 ab_compare.py 的短提示通过率 1/5，强约束提示通过率 5/5。"
+    },
+    {
+      "id": "S07",
+      "name": "Few-shot 示例嵌入 System Prompt",
+      "category": "prompt_design",
+      "description": "在 System Prompt 中嵌入 1-3 个完整的输入→输出示例，让模型理解格式期望。示例应覆盖典型场景和边界情况。",
+      "applicable_scenarios": ["格式不稳定的任务", "新 Schema 首次使用"],
+      "best_practice": "示例数量 1-3 个即可，过多会占用 context window。每个示例应包含输入+完整输出 JSON。",
+      "anti_pattern": "只给规则描述不给示例，模型对「高/中/低」这类约束理解可能因训练数据差异而偏移。",
+      "counter_example": {
+        "bad_prompt": "confidence 只能是 高/中/低。",
+        "problem": "模型可能仍然输出 'high' 或忽略这条规则。",
+        "good_prompt": "添加示例：\n输入：帮我搜索生物降解塑料相关专利\n输出：{\"intent\":\"search\",\"target_tool\":\"search_patent\",\"confidence\":\"高\",\"patent_ids\":[],\"applicants\":[],\"keywords\":[\"生物降解塑料\"],\"requested_fields\":[]}"
+      },
+      "evidence": "D13 cli_v1.py 的 SYSTEM_PROMPT 使用了「意图→工具」映射表作为隐式 Few-shot，实测 10/10 稳定通过。"
+    },
+    {
+      "id": "S08",
+      "name": "日期和列表字段的显式格式约束",
+      "category": "structured_output",
+      "description": "日期字段必须在 prompt + Schema + validator 三层同时约束格式；列表字段必须约束元素类型和最小长度。",
+      "applicable_scenarios": ["包含日期的任何 Schema", "包含列表字段的 Schema"],
+      "best_practice": "Prompt 中写「日期统一使用 YYYY-MM-DD」；Schema 用 @field_validator 做格式校验；repair 层做 normalize_date() 转换。",
+      "anti_pattern": "只在 prompt 中提一句「日期格式要正确」，不做程序化校验。",
+      "counter_example": {
+        "bad_output": "{\"filing_date\": \"2024年3月15日\"}",
+        "problem": "中文日期无法被下游 datetime.strptime 解析。",
+        "good_output": "{\"filing_date\": \"2024-03-15\"}",
+        "repair_function": "normalize_date('2024年3月15日') → '2024-03-15'"
+      },
+      "evidence": "D10 failure_samples 中 F002 的中文日期被 D11 的 normalize_date() 自动修复。D13 的 Schema 直接用 str + prompt 约束避免了这类问题。"
+    },
+    {
+      "id": "S09",
+      "name": "LLM 模式 + 规则 Fallback 双轨策略",
+      "category": "architecture",
+      "description": "默认用 LLM 做语义理解，但保留一套不依赖 LLM 的规则引擎作为 fallback。LLM 超时/出错时自动切换到规则模式。",
+      "applicable_scenarios": ["CLI 工具", "对响应时间敏感的场景", "本地模型不稳定时"],
+      "best_practice": "规则引擎覆盖最常见的 80% 场景；LLM 处理规则覆盖不到的长尾（如模糊意图、同义词理解）。",
+      "anti_pattern": "完全依赖 LLM，网络/模型不可用时整个系统瘫痪。",
+      "counter_example": {
+        "bad_approach": "所有输入都调 LLM，模型挂了直接报错。",
+        "problem": "本地 Ollama 偶尔响应慢或 OOM，用户体验断崖式下降。",
+        "good_approach": "cli_v1.py 的 --rule 模式 = 纯规则（毫秒响应），默认模式 = LLM + 120s 超时 → 自动回退规则。"
+      },
+      "evidence": "D13 cli_v1.py 实现了三种模式（默认 LLM / --rule / --check），超时 120s 自动回退规则引擎。"
+    },
+    {
+      "id": "S10",
+      "name": "模板变量元信息注册表",
+      "category": "engineering",
+      "description": "每个 prompt 模板的变量应有独立的元信息字典（description / type / required / example），方便外部程序遍历和自动测试。",
+      "applicable_scenarios": ["多模板管理", "批量测试", "文档自动生成"],
+      "best_practice": "定义 TEMPLATE_REGISTRY 和 SCHEMA_REGISTRY，统一管理所有模板和 Schema，支持遍历和自动填充测试。",
+      "anti_pattern": "变量名散落在模板字符串中，无法程序化枚举，改了变量名模板就崩。",
+      "counter_example": {
+        "bad_approach": "prompt = f\"根据 {context} 回答 {question}\"  # 变量名只存在于字符串中",
+        "problem": "无法自动检测变量是否被正确填充，重命名变量时容易遗漏。",
+        "good_approach": "TEMPLATE_REGISTRY['qa']['variables']['context'] = {'description': '...', 'type': 'str', 'required': True, 'example': '...'}"
+      },
+      "evidence": "D8 prompt_templates.py 的 TEMPLATE_REGISTRY 支持自动遍历和 demo_format_all() 批量验证。"
+    }
+  ],
+  "migration_notes": {
+    "title": "L7/L8 Notebook 可迁移到专利助手的模式",
+    "patterns": [
+      {
+        "notebook": "L7_structuredOutput.ipynb",
+        "pattern": "create_agent + response_format 绑定 Pydantic Schema",
+        "migration": "D9 已迁移为 PatentInfo / PatentComparison / QueryRewrite 三个 Schema；D13 进一步拆分为 LLMAnalysis（轻量）+ enrich_to_full（补全）。",
+        "status": "已迁移"
+      },
+      {
+        "notebook": "L7_structuredOutput.ipynb",
+        "pattern": "extra='forbid' 拒绝多余字段",
+        "migration": "D10 的 STRICT_SCHEMA_MAP 和 D13 的所有 Schema 都加了 ConfigDict(extra='forbid')。",
+        "status": "已迁移"
+      },
+      {
+        "notebook": "L7_structuredOutput.ipynb",
+        "pattern": "@field_validator 做输入校验",
+        "migration": "D13 PatentQuestionAnalysis 的 validate_not_empty + map_confidence 已实现。",
+        "status": "已迁移"
+      },
+      {
+        "notebook": "L8_dynamic.ipynb",
+        "pattern": "动态 Prompt 模板 — 根据运行时上下文选择不同 system prompt",
+        "migration": "D13 的 PROMPT_PROFILES 字典按 Intent 动态选择 prompt_profile，已实现动态路由。",
+        "status": "已迁移"
+      },
+      {
+        "notebook": "L8_dynamic.ipynb",
+        "pattern": "中间件概念 — 在 prompt 和模型之间插入预处理/后处理逻辑",
+        "migration": "D13 的 enrich_to_full() 就是一个后处理中间件：LLM 输出 → 规则补全 → 完整 Schema。D11 的 repair_output() 也是同一思路。",
+        "status": "已迁移"
+      },
+      {
+        "notebook": "L8_dynamic.ipynb",
+        "pattern": "变量注入 — PromptTemplate 的 {variable} 占位符",
+        "migration": "D8 的 qa_prompt / extract_prompt / rewrite_prompt 已使用 ChatPromptTemplate 占位符；D13 的 SYSTEM_PROMPT 使用静态模板但保留了扩展空间。",
+        "status": "已迁移"
+      }
+    ]
+  }
+}

@@ -421,17 +421,17 @@
 - [x] D12-实操：比较短提示与强约束提示
 - [x] D12-产出：`lectures/lecture12/ab_compare.py`
 - [x] D12-验收：短提示更适合低风险开放生成；强约束提示在结构化输出和自动校验场景更稳定
-- [ ] D13 总目标：专利问题结构化
-- [ ] D13-学习：综合运用 `langchain/L7_structuredOutput.ipynb` + `langchain/L8_dynamic.ipynb` + D10-D12 的经验，回顾 [HF Unit1: What are Tools?](https://huggingface.co/learn/agents-course/en/unit1/tools)（复习工具定义与 JSON Schema）
-- [ ] D13-实操：实现"问题->JSON分析"CLI
-- [ ] D13-产出：`lectures/lecture13/cli_v1.py`
-- [ ] D13-验收：10条输入稳定输出
-- [ ] D14 总目标：周复盘 / 缓冲日
-- [ ] D14-学习：回顾本周所有产出，整理 Prompt 设计与结构化输出的最佳实践，并把 `L7/L8` 里能迁移到专利助手的模式单独记一页
-- [ ] D14-实操：提炼对你项目最有效提示策略
-- [ ] D14-产出：`lectures/lecture14/prompt_strategies.json` + `docs/weekly/week02_summary.md`
-- [ ] D14-验收：每条策略有反例
-- [ ] D14-里程碑：输入问题 → 输出格式化 JSON，10 条输入稳定输出
+- [x] D13 总目标：专利问题结构化
+- [x] D13-学习：综合运用 `langchain/L7_structuredOutput.ipynb` + `langchain/L8_dynamic.ipynb` + D10-D12 的经验，回顾 [HF Unit1: What are Tools?](https://huggingface.co/learn/agents-course/en/unit1/tools)（复习工具定义与 JSON Schema）
+- [x] D13-实操：实现"问题->JSON分析"CLI
+- [x] D13-产出：`lectures/lecture13/cli_v1.py`
+- [x] D13-验收：10条输入稳定输出
+- [x] D14 总目标：周复盘 / 缓冲日
+- [x] D14-学习：回顾本周所有产出，整理 Prompt 设计与结构化输出的最佳实践，并把 `L7/L8` 里能迁移到专利助手的模式单独记一页
+- [x] D14-实操：提炼对你项目最有效提示策略
+- [x] D14-产出：`lectures/lecture14/prompt_strategies.json` + `docs/weekly/week02_summary.md`
+- [x] D14-验收：每条策略有反例
+- [x] D14-里程碑：输入问题 → 输出格式化 JSON，10 条输入稳定输出
 
 ### 第3周：LangChain 工程化（D15-D21）
 
