@@ -435,21 +435,21 @@
 
 ### 第3周：LangChain 工程化（D15-D21）
 
-- [ ] D15 总目标：Runnable/Chain 基础
-- [ ] D15-学习：先跑本地官方 notebook `langchain/L1_fast_agent.ipynb`，再看 [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview) + [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents)
-- [ ] D15-实操：搭一条最小链
-- [ ] D15-产出：`lectures/lecture15/chain_demo.py`
-- [ ] D15-验收：链路日志可读
-- [ ] D16 总目标：链路加工具调用
-- [ ] D16-学习：先跑本地官方 notebook `langchain/L4_tools.ipynb` + `langchain/L5_tools_with_mcp.ipynb`，再看 [LangChain Tools](https://docs.langchain.com/oss/python/langchain/tools) + [LangChain MCP](https://docs.langchain.com/oss/python/langchain/mcp)
-- [ ] D16-实操：接入一个检索工具
-- [ ] D16-产出：`lectures/lecture16/tool_chain.py`
-- [ ] D16-验收：工具错误可捕获
-- [ ] D17 总目标：解析与异常层
-- [ ] D17-学习：回顾 `langchain/L1_fast_agent.ipynb` 的 agent 执行链路 + [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview) + [LangChain Guardrails](https://docs.langchain.com/oss/python/langchain/guardrails)（异常处理与边界控制）
-- [ ] D17-实操：统一异常处理
-- [ ] D17-产出：`lectures/lecture17/error_wrapper.py`
-- [ ] D17-验收：错误码分类清晰
+- [x] D15 总目标：Runnable/Chain 基础
+- [x] D15-学习：先跑本地官方 notebook `langchain/L1_fast_agent.ipynb`，再看 [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview) + [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents)
+- [x] D15-实操：搭一条最小链
+- [x] D15-产出：`lectures/lecture15/chain_demo.py`
+- [x] D15-验收：链路日志可读
+- [x] D16 总目标：链路加工具调用
+- [x] D16-学习：先跑本地官方 notebook `langchain/L4_tools.ipynb` + `langchain/L5_tools_with_mcp.ipynb`，再看 [LangChain Tools](https://docs.langchain.com/oss/python/langchain/tools) + [LangChain MCP](https://docs.langchain.com/oss/python/langchain/mcp)
+- [x] D16-实操：接入一个检索工具
+- [x] D16-产出：`lectures/lecture16/tool_chain.py`
+- [x] D16-验收：工具错误可捕获
+- [x] D17 总目标：解析与异常层
+- [x] D17-学习：回顾 `langchain/L1_fast_agent.ipynb` 的 agent 执行链路 + [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview) + [LangChain Guardrails](https://docs.langchain.com/oss/python/langchain/guardrails)（异常处理与边界控制）
+- [x] D17-实操：统一异常处理
+- [x] D17-产出：`lectures/lecture17/error_wrapper.py`
+- [x] D17-验收：错误码分类清晰
 - [ ] D18 总目标：上下文拼装
 - [ ] D18-学习：先跑本地官方 notebook `langchain/L2_messages.ipynb`，再看 [Happy-LLM Chapter4](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter4) + [LangChain Context Engineering](https://docs.langchain.com/oss/python/langchain/context-engineering)
 - [ ] D18-实操：实现上下文裁剪

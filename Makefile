@@ -6,7 +6,7 @@ run:
 		echo "用法: make run lecture01 或 make run L=lecture01"; \
 		exit 1; \
 	fi; \
-	./run "$$lecture"
+	./run "$$lecture" $(ARGS)
 
 test:
 	@lecture="$(if $(L),$(L),$(word 2,$(MAKECMDGOALS)))"; \
@@ -14,7 +14,7 @@ test:
 		echo "用法: make test lecture01 或 make test L=lecture01"; \
 		exit 1; \
 	fi; \
-	./test "$$lecture"
+	./test "$$lecture" $(ARGS)
 
 %:
 	@:
