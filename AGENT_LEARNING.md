@@ -450,34 +450,37 @@
 - [x] D17-实操：统一异常处理
 - [x] D17-产出：`lectures/lecture17/error_wrapper.py`
 - [x] D17-验收：错误码分类清晰
-- [ ] D18 总目标：上下文拼装
-- [ ] D18-学习：先跑本地官方 notebook `langchain/L2_messages.ipynb`，再看 [Happy-LLM Chapter4](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter4) + [LangChain Context Engineering](https://docs.langchain.com/oss/python/langchain/context-engineering)
-- [ ] D18-实操：实现上下文裁剪
-- [ ] D18-产出：`lectures/lecture18/context_builder.py`
-- [ ] D18-验收：超长输入可自动截断
-- [ ] D19 总目标：单测补齐
-- [ ] D19-学习：先跑本地官方 notebook `langchain/L3_streaming.ipynb`，再看 [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents)（把 agent loop、tool call、state 输入输出读清楚，为第4周铺路）
-- [ ] D19-实操：写5个关键测试
-- [ ] D19-产出：`lectures/lecture19/test_cases.py`
-- [ ] D19-验收：覆盖正常与异常路径
-- [ ] D20 总目标：端到端串联
-- [ ] D20-学习：回顾本周 `langchain/L1-L5` notebook 与 [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview) / [Agents](https://docs.langchain.com/oss/python/langchain/agents) / [Tools](https://docs.langchain.com/oss/python/langchain/tools) / [MCP](https://docs.langchain.com/oss/python/langchain/mcp) / [Guardrails](https://docs.langchain.com/oss/python/langchain/guardrails) 笔记，综合运用
-- [ ] D20-实操：把 `lectures/lecture13/cli_v1.py` 迁移到可复用链路
-- [ ] D20-产出：`lectures/lecture20/cli_v2.py`
-- [ ] D20-验收：功能等价且结构更清晰
-- [ ] D21 总目标：周复盘 + Semantic Kernel 对照 + LangGraph Essentials 预习
-- [ ] D21-学习：[SK Get Started](https://learn.microsoft.com/en-us/semantic-kernel/get-started/quick-start-guide?pivots=programming-language-python) + 先跑本地官方 notebook `langgraph/L1_nodes.ipynb` / `langgraph/L2_edges.ipynb` / `langgraph/L3-L4_cedges_memory.ipynb` 的前半部分，再看 [LangGraph Essentials L1-L3 预习: Nodes / Edges / Conditional Edges](https://academy.langchain.com/courses/langgraph-essentials-python)
-- [ ] D21-LearnGraph 补充：[LG 3.1 State Schema](https://www.learngraph.online/LearnGraph%201.X/module-3/3.1%20State%20Schema.html)（为 W4 LangGraph 做 State 设计预习）
-- [ ] D21-实操：列出重构点 + 用 SK 重写 `lectures/lecture15/chain_demo.py` 的最小链路，对比 LangChain 与 SK 的开发体验；**预习 LangGraph Essentials（State/Nodes/Edges 概览），跑通 email workflow 示例，为第 4 周 LangGraph 学习热身**
-- [ ] D21-产出：`lectures/lecture21/refactor_priorities.json` + `docs/comparisons/sk_vs_langchain.md` + `lectures/lecture21/langgraph_essentials_preview.md` + `docs/weekly/week03_summary.md`
-- [ ] D21-验收：至少3项有收益评估；SK 对比覆盖 API 风格、插件机制、错误处理；能解释 State/Nodes/Edges 三者关系
+- [x] D18 总目标：上下文拼装
+- [x] D18-学习：先跑本地官方 notebook `langchain/L2_messages.ipynb`，再看 [Happy-LLM Chapter4](https://github.com/datawhalechina/happy-llm/tree/main/docs/chapter4) + [LangChain Context Engineering](https://docs.langchain.com/oss/python/langchain/context-engineering)
+- [x] D18-实操：实现上下文裁剪
+- [x] D18-产出：`lectures/lecture18/context_builder.py`
+- [x] D18-验收：超长输入可自动截断
+- [x] D19 总目标：单测补齐
+- [x] D19-学习：先跑本地官方 notebook `langchain/L3_streaming.ipynb`，再看 [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents)（把 agent loop、tool call、state 输入输出读清楚，为第4周铺路）
+- [x] D19-实操：写5个关键测试
+- [x] D19-产出：`lectures/lecture19/test_cases.py`
+- [x] D19-验收：覆盖正常与异常路径
+- [x] D20 总目标：端到端串联
+- [x] D20-学习：回顾本周 `langchain/L1-L5` notebook 与 [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview) / [Agents](https://docs.langchain.com/oss/python/langchain/agents) / [Tools](https://docs.langchain.com/oss/python/langchain/tools) / [MCP](https://docs.langchain.com/oss/python/langchain/mcp) / [Guardrails](https://docs.langchain.com/oss/python/langchain/guardrails) 笔记，综合运用
+- [x] D20-实操：把 `lectures/lecture13/cli_v1.py` 迁移到可复用链路
+- [x] D20-产出：`lectures/lecture20/cli_v2.py`
+- [x] D20-验收：功能等价且结构更清晰
+- [ ] D21 总目标：周复盘 + LangGraph Essentials 预习
+- [ ] D21-学习：先跑本地官方 notebook `langgraph/L1_nodes.ipynb` / `langgraph/L2_edges.ipynb` / `langgraph/L3-L4_cedges_memory.ipynb` 的前半部分，再看 [LangGraph Essentials L1-L3 预习: Nodes / Edges / Conditional Edges](https://academy.langchain.com/courses/langgraph-essentials-python)
+- [ ] D21-LearnGraph 补充：[LG 3.1 State Schema](https://www.learngraph.online/LearnGraph%201.X/module-3-state-reducer-memory/3.1%20State%20schema.html)（为 W4 LangGraph 做 State 设计预习）
+- [ ] D21-实操：
+  - 回顾 W3 全部产出（D15-D20），列出需要重构的优先级
+  - **预习 LangGraph Essentials**：通读 State / Nodes / Edges 概览，跑通 email workflow 示例，为第 4 周 LangGraph 学习热身
+  - 整理第 3 周学习笔记，总结 LCEL 链路、工具调用、异常体系、上下文裁剪四大模块的要点
+- [ ] D21-产出：`lectures/lecture21/refactor_priorities.json` + `lectures/lecture21/langgraph_essentials_preview.md` + `docs/weekly/week03_summary.md`
+- [ ] D21-验收：至少 3 项改进有收益评估；能解释 LangGraph 的 State/Nodes/Edges 三者关系
 - [ ] D21-里程碑：链路日志可读 + 工具错误可捕获，`cli v2` 能跑通
 
 ### 第4周：LangGraph 入门与状态机（D22-D28）
 
 - [ ] D22 总目标：LangGraph 基础概念（基于 D21 Quickstart 预习深入）
 - [ ] D22-学习：先精读本地官方 notebook `langgraph/L1_nodes.ipynb`，再看 [LangGraph Overview](https://docs.langchain.com/oss/python/langgraph/overview) + [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
-- [ ] D22-LearnGraph 补充：[LG 8.0.1 State-node-edge](https://www.learngraph.online/LearnGraph%201.X/module-8-classic-examples/8.0.1%20State-node-edge.html) + [LG 3.2 State Reducers](https://www.learngraph.online/LearnGraph%201.X/module-3/3.2%20State%20Reducers.html)（经典案例 + Reducer 深入）
+- [ ] D22-LearnGraph 补充：[LG 8.0.1 State-node-edge](https://www.learngraph.online/LearnGraph%201.X/module-8-classic-examples/8.0.1%20State-node-edge.html) + [LG 3.2 State Reducers](https://www.learngraph.online/LearnGraph%201.X/module-3-state-reducer-memory/3.2%20Reducers.html)（经典案例 + Reducer 深入）
 - [ ] D22-实操：定义状态对象（结合 D21 email workflow 的 State 模式）
 - [ ] D22-产出：`lectures/lecture22/state_draft.py`
 - [ ] D22-验收：状态字段可解释，能对比 email workflow State 与你的专利分析 State 差异
