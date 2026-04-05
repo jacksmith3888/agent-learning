@@ -134,6 +134,47 @@
 - `langgraph/L5_interrupt.ipynb`：Interrupt / Human-in-the-Loop，适合放在第 8 周和第 9 周
 - `langgraph/L6_EmailAgent.ipynb`：完整 email workflow，适合放在第 4 周周末做整合
 
+#### Foundation Notebook 主线（已同步到 `langchain-academy/`，来自 [langchain-academy](https://github.com/langchain-ai/langchain-academy)）
+
+> Foundation 课程比 Quickstart 更系统、更细致，notebook 按 module 编排。需要的 API Key：OpenAI（可用 Ollama/Gemini 替代）、LangSmith（免费 Developer 计划）、Tavily（免费额度，仅 Module 4 使用）。
+
+- `langchain-academy/module-0/basics.ipynb`：LangGraph 基础概念回顾，适合放在第 4 周第一天作为热身
+- `langchain-academy/module-1/`：Simple Graph，适合放在第 4 周 D22-D23
+  - `simple-graph.ipynb`：State/Nodes/Edges 基础
+  - `chain.ipynb`：Chain 构建
+  - `router.ipynb`：路由模式
+  - `agent.ipynb`：Agent 构建
+  - `agent-memory.ipynb`：Agent 记忆
+  - `deployment.ipynb`：部署入门
+- `langchain-academy/module-2/`：State & Memory，适合放在第 4 周 D24-D25
+  - `state-schema.ipynb`：State Schema 定义
+  - `state-reducers.ipynb`：Custom Reducers
+  - `multiple-schemas.ipynb`：多 Schema 设计
+  - `trim-filter-messages.ipynb`：消息裁剪与过滤
+  - `chatbot-summarization.ipynb`：摘要记忆
+  - `chatbot-external-memory.ipynb`：外部记忆
+- `langchain-academy/module-3/`：UX 模式（Streaming + HITL），适合放在第 5 周 D30-D31
+  - `breakpoints.ipynb`：断点中断
+  - `dynamic-breakpoints.ipynb`：动态断点
+  - `edit-state-human-feedback.ipynb`：状态编辑与人工反馈
+  - `streaming-interruption.ipynb`：流式中断
+  - `time-travel.ipynb`：时间旅行
+- `langchain-academy/module-4/`：高级模式，适合放在第 6 周 D38 + 第 8 周 D53
+  - `parallelization.ipynb`：并行化
+  - `sub-graph.ipynb`：子图
+  - `map-reduce.ipynb`：Map-Reduce
+  - `research-assistant.ipynb`：研究助手（Tavily 工具实战）
+- `langchain-academy/module-5/`：Long-Term Memory，适合放在第 5 周 D34
+  - `memory_agent.ipynb`：记忆 Agent
+  - `memory_store.ipynb`：记忆存储
+  - `memoryschema_profile.ipynb`：用户画像 Schema
+  - `memoryschema_collection.ipynb`：记忆集合 Schema
+- `langchain-academy/module-6/`：Deployment，适合放在第 11 周 D76
+  - `creating.ipynb`：创建部署
+  - `connecting.ipynb`：连接部署
+  - `double-texting.ipynb`：双重文本处理
+  - `assistant.ipynb`：Assistants API
+
 #### 建议编排原则
 
 - 第 2-3 周优先消化 LangChain Notebook，目标是把单体 Agent 的输入、输出、工具、Prompt、记忆边界理清楚
@@ -479,24 +520,28 @@
 ### 第4周：LangGraph 入门与状态机（D22-D28）
 
 - [ ] D22 总目标：LangGraph 基础概念（基于 D21 Quickstart 预习深入）
-- [ ] D22-学习：先精读本地官方 notebook `langgraph/L1_nodes.ipynb`，再看 [LangGraph Overview](https://docs.langchain.com/oss/python/langgraph/overview) + [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
+- [ ] D22-学习：精读 Foundation `langchain-academy/module-0/basics.ipynb` + `module-1/simple-graph.ipynb` + `module-1/chain.ipynb`，配合 [LangGraph Overview](https://docs.langchain.com/oss/python/langgraph/overview) + [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
+- [ ] D22-Quickstart 参考：回看 `langgraph/L1_nodes.ipynb`，对比 Foundation 的拆分细度差异
 - [ ] D22-LearnGraph 补充：[LG 8.0.1 State-node-edge](https://www.learngraph.online/LearnGraph%201.X/module-8-classic-examples/8.0.1%20State-node-edge.html) + [LG 3.2 State Reducers](https://www.learngraph.online/LearnGraph%201.X/module-3-state-reducer-memory/3.2%20Reducers.html)（经典案例 + Reducer 深入）
 - [ ] D22-实操：定义状态对象（结合 D21 email workflow 的 State 模式）
 - [ ] D22-产出：`lectures/lecture22/state_draft.py`
 - [ ] D22-验收：状态字段可解释，能对比 email workflow State 与你的专利分析 State 差异
 - [ ] D23 总目标：节点与边
-- [ ] D23-学习：先精读本地官方 notebook `langgraph/L2_edges.ipynb`，再看 [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) + [LangGraph Workflows and agents](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+- [ ] D23-学习：精读 Foundation `langchain-academy/module-1/router.ipynb` + `module-1/agent.ipynb` + `module-1/agent-memory.ipynb`，配合 [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) + [LangGraph Workflows and agents](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+- [ ] D23-Quickstart 参考：回看 `langgraph/L2_edges.ipynb`，对比边的定义方式
 - [ ] D23-LearnGraph 补充：[LG 8.0.2 Routing function](https://www.learngraph.online/LearnGraph%201.X/module-8-classic-examples/8.0.2%20Routing%20function.html) + [LG 8.0.4 Conditional edges](https://www.learngraph.online/LearnGraph%201.X/module-8-classic-examples/8.0.4%20Conditional%20edges.html)（路由与条件边案例）
 - [ ] D23-实操：实现3节点图
 - [ ] D23-产出：`lectures/lecture23/graph_v1.py`
 - [ ] D23-验收：执行路径正确
-- [ ] D24 总目标：ReAct in Graph
-- [ ] D24-学习：先精读本地官方 notebook `langgraph/L3-L4_cedges_memory.ipynb` 的 Conditional Edges 部分，再看 [HF Unit2.3 - LangGraph](https://huggingface.co/learn/agents-course/en/unit2/langgraph/introduction) + [LangGraph Workflows and agents](https://docs.langchain.com/oss/python/langgraph/workflows-agents) + 回顾 [HF Unit1: Thoughts (ReAct)](https://huggingface.co/learn/agents-course/en/unit1/thoughts)
+- [ ] D24 总目标：ReAct in Graph + State 深入
+- [ ] D24-学习：精读 Foundation `langchain-academy/module-2/state-schema.ipynb` + `module-2/state-reducers.ipynb` + `module-2/multiple-schemas.ipynb`，配合 [HF Unit2.3 - LangGraph](https://huggingface.co/learn/agents-course/en/unit2/langgraph/introduction) + [LangGraph Workflows and agents](https://docs.langchain.com/oss/python/langgraph/workflows-agents) + 回顾 [HF Unit1: Thoughts (ReAct)](https://huggingface.co/learn/agents-course/en/unit1/thoughts)
+- [ ] D24-Quickstart 参考：回看 `langgraph/L3-L4_cedges_memory.ipynb` 的 Conditional Edges 部分
 - [ ] D24-实操：把ReAct迁移到图
 - [ ] D24-产出：`lectures/lecture24/react_graph.py`
 - [ ] D24-验收：工具调用稳定
-- [ ] D25 总目标：反思机制
-- [ ] D25-学习：先精读本地官方 notebook `langgraph/L3-L4_cedges_memory.ipynb` 的 Memory 部分，再看 [LangChain Context Engineering](https://docs.langchain.com/oss/python/langchain/context-engineering) + [LangGraph Memory](https://docs.langchain.com/oss/python/langgraph/memory)
+- [ ] D25 总目标：反思机制 + Memory
+- [ ] D25-学习：精读 Foundation `langchain-academy/module-2/trim-filter-messages.ipynb` + `module-2/chatbot-summarization.ipynb` + `module-2/chatbot-external-memory.ipynb`，配合 [LangChain Context Engineering](https://docs.langchain.com/oss/python/langchain/context-engineering) + [LangGraph Memory](https://docs.langchain.com/oss/python/langgraph/memory)
+- [ ] D25-Quickstart 参考：回看 `langgraph/L3-L4_cedges_memory.ipynb` 的 Memory 部分
 - [ ] D25-实操：加一次自检节点
 - [ ] D25-产出：`lectures/lecture25/reflection_node.py`
 - [ ] D25-验收：错误回答可二次修正
@@ -528,8 +573,9 @@
 - [ ] D29-实操：理清会话边界
 - [ ] D29-产出：`lectures/lecture29/test_session_rules.py`
 - [ ] D29-验收：跨会话不串数据
-- [ ] D30 总目标：ChatBot短期记忆
-- [ ] D30-学习：回看本地官方 notebook `langgraph/L3-L4_cedges_memory.ipynb` 的 Memory 实验，再看 [LangGraph Memory](https://docs.langchain.com/oss/python/langgraph/memory) + [LangGraph Add Memory Guide](https://docs.langchain.com/oss/python/langgraph/add-memory)
+- [ ] D30 总目标：ChatBot短期记忆 + Streaming/HITL
+- [ ] D30-学习：精读 Foundation `langchain-academy/module-3/breakpoints.ipynb` + `module-3/dynamic-breakpoints.ipynb` + `module-3/streaming-interruption.ipynb`，配合 [LangGraph Memory](https://docs.langchain.com/oss/python/langgraph/memory) + [LangGraph Add Memory Guide](https://docs.langchain.com/oss/python/langgraph/add-memory)
+- [ ] D30-Quickstart 参考：回看 `langgraph/L5_interrupt.ipynb`，对比 Foundation 的 HITL 拆分粒度
 - [ ] D30-LearnGraph 补充：[LG 3.4 Trim & Filter Messages](https://www.learngraph.online/LearnGraph%201.X/module-3/3.4%20Trim%20Filter%20Messages.html) + [LG 3.5 Chatbot Summarization](https://www.learngraph.online/LearnGraph%201.X/module-3/3.5%20Chatbot%20Summarization.html)（消息裁剪与摘要记忆工程实现）
 - [ ] D30-实操：摘要记忆接入
 - [ ] D30-产出：`lectures/lecture30/summary_memory.py`
@@ -553,6 +599,7 @@
 - [ ] D33-验收：有吞吐与复杂度权衡
 - [ ] D34 总目标：用户画像
 - [ ] D34-学习：[Intro to LangGraph M5 L5: Build Agent with Long-Term Memory](https://academy.langchain.com/courses/intro-to-langgraph)
+- [ ] D34-Foundation 补充：跑 `module-5/` 完整 notebook（InMemoryStore → namespace → 用户画像，代码可直接迁移到专利助手）
 - [ ] D34-LearnGraph 补充：[LG 6.3 Memory Schema Profile](https://www.learngraph.online/LearnGraph%201.X/module-6-memory-system/6.3%20Memory%20Schema%20Profile.html) + [LG 6.4 Memory Schema Collection](https://www.learngraph.online/LearnGraph%201.X/module-6-memory-system/6.4%20Memory%20Schema%20Collection.html)（用户画像 Schema 设计）
 - [ ] D34-实操：定义画像字段与更新策略
 - [ ] D34-产出：`lectures/lecture34/profile_schema.py`
@@ -579,6 +626,7 @@
 - [ ] D37-验收：返回Top-k证据
 - [ ] D38 总目标：Agentic RAG
 - [ ] D38-学习：[Build a custom RAG agent with LangGraph](https://docs.langchain.com/oss/python/langgraph/agentic-rag) + HF Unit3 前2节：[Introduction](https://huggingface.co/learn/agents-course/en/unit3/agentic-rag/introduction) → [Agentic RAG](https://huggingface.co/learn/agents-course/en/unit3/agentic-rag/agentic-rag)
+- [ ] D38-Foundation 补充：跑 `module-4/` 的 Agentic Search notebook（Tavily 工具实战，免费 API 额度足够完成练习）
 - [ ] D38-LearnGraph 补充：[LG 13.5 Agentic RAG Architecture](https://www.learngraph.online/LearnGraph%201.X/module-13-agentic-rag/13.5%20Agentic%20RAG%20Architecture.html) + [LG 13.7 LangGraph Agentic RAG](https://www.learngraph.online/LearnGraph%201.X/module-13-agentic-rag/13.7%20LangGraph%20Agentic%20RAG.html)（Agentic RAG 架构与 LangGraph 实现）
 - [ ] D38-实操：引入"是否检索"决策
 - [ ] D38-产出：`lectures/lecture38/agentic_rag_v1.py`
@@ -808,6 +856,7 @@
 - [ ] D75-验收：可定位失败节点
 - [ ] D76 总目标：部署认知
 - [ ] D76-学习：[LangChain Deploy](https://docs.langchain.com/oss/python/langchain/deploy) + [Introduction to LangGraph](https://academy.langchain.com/courses/intro-to-langgraph)（deployment 模块）
+- [ ] D76-Foundation 补充：跑 `module-6/` 的 Deployment notebook（LangGraph Platform 部署实战，从「认知」升级为「实操」）
 - [ ] D76-LearnGraph 补充：[LG 7.1-7.4 生产部署](https://www.learngraph.online/LearnGraph%201.X/module-7-production-deployment/7.1%20Creating%20Deployment.html)（Creating/Connecting/Double-texting/Assistants）
 - [ ] D76-实操：写部署要点
 - [ ] D76-产出：`lectures/lecture76/deploy_note.md`
